@@ -4,7 +4,7 @@
     <item
         android:id="@+id/conversionFragment"
         android:title="Convert"
-        android:icon="@drawable/ic_convert" />
+        android:icon="@drawable/ic_currencyexchange" />
     <item
         android:id="@+id/currenciesFragment"
         android:title="Currencies"

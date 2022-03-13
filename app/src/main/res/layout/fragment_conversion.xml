@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearlayout"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="From"
+                    android:text="@string/from"
                     android:textSize="20sp"
                     android:fontFamily="@font/coolvetica_regular"
                     android:textColor="@color/black"/>
@@ -46,7 +47,7 @@
                     <AutoCompleteTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Currency"
+                        tools:hint="USD"
                         android:drawableStart="@drawable/ic_money"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +58,9 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_arrows"
                 app:tint="@color/black"
-                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="36dp"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,7 +90,7 @@
                     <AutoCompleteTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Currency"
+                        tools:hint="BRL"
                         android:drawableStart="@drawable/ic_money"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +98,149 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="20dp"
+            android:text="@string/value"
+            android:textSize="20sp"
+            android:fontFamily="@font/coolvetica_regular"
+            android:textColor="@color/black"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/value_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_value"
+            app:layout_constraintStart_toStartOf="@id/tv_value"
+            app:layout_constraintTop_toBottomOf="@id/tv_value">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/ic_money"
+                android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/convert_button"
+            android:layout_width="wrap_content"
+            android:layout_height="60sp"
+            android:text="@string/convert"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/value_input_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/coolvetica_regular"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/convert_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/lighter_gray"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="10dp"
+            android:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+
+                <TextView
+                    android:id="@+id/tv_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coolvetica_regular"
+                    android:text="@string/result_of_conversion"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_result">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/coolvetica_regular"
+                        android:text="@string/value_to_be_converted"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/coolvetica_regular"
+                        android:text="@string/to_be_converted"
+                        android:textColor="@color/darker_green"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearlayout2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/coolvetica_regular"
+                        android:text="@string/converted_value"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/coolvetica_regular"
+                        android:text="@string/value_converted"
+                        android:textColor="@color/darker_green"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/linearlayout3"
+                    android:fontFamily="@font/coolvetica_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/phrase_attention"
+                    android:textAlignment="center"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
