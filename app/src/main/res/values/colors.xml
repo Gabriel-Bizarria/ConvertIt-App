@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Green Color. -->
+    <color name="main_green">#5CDF79</color>
+    <color name="lighter_green">#B6FFC6</color>
+    <color name="darker_green">#338946</color>
+
+    <!-- Gray Color. -->
+    <color name="lighter_gray">#DEDEDE</color>
+    <color name="darker_gray">#C4C4C4</color>
+
+    <!-- Basic Colors. -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
