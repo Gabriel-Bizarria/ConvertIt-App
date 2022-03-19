@@ -45,10 +45,12 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     >
                     <AutoCompleteTextView
+                        android:id="@+id/it_main_currencies"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:hint="USD"
-                        android:drawableStart="@drawable/ic_money"/>
+                        android:drawableStart="@drawable/ic_money"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -91,7 +93,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:hint="BRL"
-                        android:drawableStart="@drawable/ic_money"/>
+                        android:drawableStart="@drawable/ic_money"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -123,10 +126,12 @@
             app:layout_constraintTop_toBottomOf="@id/tv_value">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ti_value"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/ic_money"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -146,6 +151,7 @@
             />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/convert_button"
@@ -154,7 +160,7 @@
             android:backgroundTint="@color/lighter_gray"
             android:layout_margin="20dp"
             app:cardCornerRadius="10dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -191,6 +197,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tv_value_to_convert"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -220,6 +227,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tv_result_converted"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
