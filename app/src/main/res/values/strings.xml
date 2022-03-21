@@ -11,6 +11,7 @@
     <string name="convert">Convert</string>
     <string name="value">Value</string>
     <string name="from">From</string>
+    <string name="compare_one_from">Compare $1 from</string>
 
     <!-- DropDown Menu-->
 

@@ -48,7 +48,8 @@
                         android:id="@+id/it_main_currencies"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:hint="USD"
+                        tools:text="USD"
+                        android:textAlignment="center"
                         android:drawableStart="@drawable/ic_money"
                         android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -92,7 +93,8 @@
                     <AutoCompleteTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:hint="BRL"
+                        tools:text="BRL"
+                        android:textAlignment="center"
                         android:drawableStart="@drawable/ic_money"
                         android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>

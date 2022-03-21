@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.convertit.convertitapp.databinding.FragmentConversionBinding
 
 class ConversionFragment : Fragment() {
@@ -34,19 +35,6 @@ class ConversionFragment : Fragment() {
         _binding = FragmentConversionBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        //MOCK DE VALORES DE CONVERSÃO PARA TESTE
-        val USD = 5.02
-        val EUR = 5.56
-
-        binding.convertButton.setOnClickListener {
-            val value = binding.tiValue.text.toString().toDouble()
-            var valueConverted = value * USD
-
-            binding.tvValueToConvert.text = value.toString()
-            binding.tvResultConverted.text = formatter.format(valueConverted)
-
-            binding.cvResult.visibility = View.VISIBLE
-        }
         return view
     }
 
@@ -58,11 +46,33 @@ class ConversionFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        //MOCK DE VALORES DE CONVERSÃO PARA TESTE
+        val USD = 5.02
+        val EUR = 5.56
+
+
         val currencies = resources.getStringArray(R.array.main_currencies_list)
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_list_currencies, currencies)
 
         with(binding.itMainCurrencies){
             setAdapter(adapter)
+        }
+
+        binding.convertButton.setOnClickListener {
+            var value = binding.tiValue.text.toString()
+            if(value.isNullOrBlank()){
+                Toast.makeText(
+                    requireContext(),
+                    "This value is not valid!",
+                    Toast.LENGTH_SHORT).show()
+            }else{
+                var valueConverted = value.toDouble() * USD
+
+                binding.tvValueToConvert.text = formatter.format(value.toDouble())
+                binding.tvResultConverted.text = formatter.format(valueConverted)
+
+                binding.cvResult.visibility = View.VISIBLE
+            }
         }
     }
 
