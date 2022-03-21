@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CurrenciesFragment">
+    tools:context=".ui.CurrenciesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -58,7 +58,7 @@
             android:text="Currencies"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/main_linearlayout" />
 
@@ -66,11 +66,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/tv_currencies">
+            app:layout_constraintTop_toBottomOf="@+id/tv_currencies"
+            android:layout_marginTop="10dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="8dp"
                 android:backgroundTint="@color/darker_gray">
 
@@ -96,7 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:layout_weight="1"
                         android:fontFamily="@font/coolvetica_regular"
                         android:textAlignment="center"
@@ -120,6 +123,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/darker_gray">
 
                 <LinearLayout
@@ -147,7 +153,7 @@
                         android:fontFamily="@font/coolvetica_regular"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:text="Euro" />
 
                     <TextView
@@ -167,6 +173,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="8dp"
                 android:backgroundTint="@color/darker_gray">
 
@@ -195,7 +204,7 @@
                         android:fontFamily="@font/coolvetica_regular"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:text="Canadian Dollar"
                         />
 
@@ -214,6 +223,9 @@
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
@@ -244,7 +256,7 @@
                         android:fontFamily="@font/coolvetica_regular"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:text="Yuan" />
 
                     <TextView
@@ -264,6 +276,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="8dp"
                 android:backgroundTint="@color/darker_gray">
 
@@ -292,8 +307,8 @@
                         android:fontFamily="@font/coolvetica_regular"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Argentinian peso" />
+                        android:textSize="16sp"
+                        android:text="Argentinian Peso" />
 
                     <TextView
                         android:id="@+id/tv_value_currency_ars"
@@ -312,6 +327,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="8dp"
                 android:backgroundTint="@color/darker_gray">
 
@@ -340,7 +358,7 @@
                         android:fontFamily="@font/coolvetica_regular"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:text="Yen" />
 
                     <TextView

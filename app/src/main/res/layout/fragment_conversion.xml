@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConversionFragment">
+    tools:context=".ui.ConversionFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -91,6 +91,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     >
                     <AutoCompleteTextView
+                        android:id="@+id/it_second_currency"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:text="BRL"

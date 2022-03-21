@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">ConvertItApp</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="phrase_attention">*Pay attention: This values are only for informations.
-        To specific conversions, consult the exchange rules in your respective country.</string>
+    <string name="phrase_attention">*Attention: This conversion is for informational purpose only. For official information, consult your country currencies exchange rules.</string>
     <string name="value_converted">VALUE_CONVERTED</string>
     <string name="converted_value">Converted value</string>
     <string name="to_be_converted">TO_BE_CONVERTED</string>
@@ -19,5 +18,21 @@
         <item>USD</item>
         <item>BRL</item>
         <item>EUR</item>
+    </string-array>
+
+    <string-array name="second_currencies_list">
+        <item>USD</item>
+        <item>BRL</item>
+        <item>EUR</item>
+        <item>CAD</item>
+        <item>CNY</item>
+        <item>ARS</item>
+        <item>JPY</item>
+        <item>GBP</item>
+        <item>CLP</item>
+        <item>NZD</item>
+        <item>ZAR</item>
+        <item>AUD</item>
+        <item>NOK</item>
     </string-array>
 </resources>

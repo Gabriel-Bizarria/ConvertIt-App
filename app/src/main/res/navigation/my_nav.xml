@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/conversionFragment"
-        android:name="com.convertit.convertitapp.ConversionFragment"
+        android:name="com.convertit.convertitapp.ui.ConversionFragment"
         android:label="Convert"
         tools:layout="@layout/fragment_conversion" />
     <fragment
         android:id="@+id/currenciesFragment"
-        android:name="com.convertit.convertitapp.CurrenciesFragment"
+        android:name="com.convertit.convertitapp.ui.CurrenciesFragment"
         android:label="Currencies"
         tools:layout="@layout/fragment_currencies" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.convertit.convertitapp.SettingsFragment"
+        android:name="com.convertit.convertitapp.ui.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>
