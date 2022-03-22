@@ -1,12 +1,13 @@
 package com.convertit.convertitapp.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.convertit.convertitapp.ConversionViewModel
 import com.convertit.convertitapp.R
@@ -18,19 +19,16 @@ class ConversionFragment : Fragment() {
     private var _binding: FragmentConversionBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var viewModel: ConversionViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var viewModel: ConversionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         viewModel = ViewModelProvider(this).get(ConversionViewModel::class.java)
+
         // Inflate the layout for this fragment
         _binding = FragmentConversionBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -63,27 +61,20 @@ class ConversionFragment : Fragment() {
             val firstCurrency = binding.itMainCurrencies.text.toString()
             val secondCurrency = binding.itSecondCurrency.text.toString()
 
-            Toast.makeText(context, "$firstCurrency-$secondCurrency", Toast.LENGTH_SHORT).show()
-
             var value = binding.tiValue.text.toString()
 
-            if(value.isNullOrBlank()){
+            if(value.isNullOrBlank() || firstCurrency == secondCurrency){
                 Toast.makeText(
                     requireContext(),
-                    "This value is not valid!",
+                    "This value is not valid or the same currencies are selected!",
                     Toast.LENGTH_SHORT).show()
             }else{
-                var valueConverted = viewModel.getCurrency(firstCurrency, secondCurrency, value.toDouble())
-
                 binding.tvValueToConvert.text = formatter.format(value.toDouble())
-                binding.tvResultConverted.text = formatter.format(valueConverted)
-
+                viewModel.getCurrency(firstCurrency, secondCurrency, value.toDouble()).observe(viewLifecycleOwner, Observer {
+                    binding.tvResultConverted.text = formatter.format(it)
+                })
                 binding.cvResult.visibility = View.VISIBLE
             }
         }
     }
-
-
-
-
 }

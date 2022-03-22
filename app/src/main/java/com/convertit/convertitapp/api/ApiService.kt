@@ -5,12 +5,11 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface Endpoint{
+interface ApiService{
     @GET("json/last/{from}-{to}")
     fun getCurrency(
-        @Path("from", encoded = true)from: String,
-        @Path("to", encoded = true)to: String)
-    : Call<JsonObject>
-
+        @Path("from")from: String,
+        @Path("to")to: String
+    ): Call<JsonObject>
 
 }
