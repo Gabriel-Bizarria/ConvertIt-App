@@ -13,13 +13,15 @@ import com.convertit.convertitapp.formatter
 class ConversionViewModel: ViewModel() {
 
     fun getCurrency(first: String, second: String, value: Double): Double{
-        val retrofitClient = NetworkUtils.getRetrofitInstance("http://economia.awesomeapi.com.br/")
+        val retrofitClient = NetworkUtils.getRetrofitInstance("https://economia.awesomeapi.com.br/")
         val endpoint = retrofitClient.create(Endpoint::class.java)
         var conversion: Double = 0.0
 
         endpoint.getCurrency(first, second).enqueue(object: Callback<JsonObject>{
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                var data = response.body()?.entrySet()?.find { it.key == "bid"}
+                //var data = response.body()?.entrySet()?.find { it.key == second }
+                var data = response.body()?.entrySet()?.find { it.key == "bid" }
+                println("THIS IS THE DATA THAT WE RECEIVED: $data")
                 val rate: Double = data?.value.toString().toDouble()
 
                 conversion = value * rate
