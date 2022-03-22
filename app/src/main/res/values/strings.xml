@@ -11,7 +11,7 @@
     <string name="value">Value</string>
     <string name="from">From</string>
     <string name="compare_one_from">Compare $1 from</string>
-
+    <string name="toast_alert_not_valid_value">This value is not valid or the same currencies are selected!</string>
     <!-- DropDown Menu-->
 
     <string-array name="main_currencies_list">

@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.convertit.convertitapp.viewModel.ConversionViewModel
+import com.convertit.convertitapp.viewModel.MainViewModel
 import com.convertit.convertitapp.R
 import com.convertit.convertitapp.databinding.FragmentConversionBinding
 import com.convertit.convertitapp.ui.helpers.formatter
 import com.convertit.convertitapp.model.Request
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -25,7 +22,7 @@ class ConversionFragment : Fragment() {
     private var _binding: FragmentConversionBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ConversionViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +30,7 @@ class ConversionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProvider(this).get(ConversionViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         // Inflate the layout for this fragment
         _binding = FragmentConversionBinding.inflate(inflater, container, false)
@@ -67,22 +64,22 @@ class ConversionFragment : Fragment() {
             val firstCurrency = binding.itMainCurrencies.text.toString()
             val secondCurrency = binding.itSecondCurrency.text.toString()
             var value = binding.tiValue.text.toString()
-            val request = Request(firstCurrency, secondCurrency, value.toDouble())
+            var request: Request
 
             if(value.isNullOrBlank() || firstCurrency == secondCurrency){
                 Toast.makeText(
                     requireContext(),
-                    "This value is not valid or the same currencies are selected!",
+                    R.string.toast_alert_not_valid_value,
                     Toast.LENGTH_SHORT).show()
             }else{
+                request = Request(firstCurrency, secondCurrency, value.toDouble())
                 binding.tvValueToConvert.text = formatter.format(value.toDouble())
 
-                lifecycleScope.async {
+                lifecycleScope.launch {
                     viewModel.getCurrency(request).observe(viewLifecycleOwner) {
                         binding.tvResultConverted.text = formatter.format(it)
                     }
                 }
-
                 binding.cvResult.visibility = View.VISIBLE
             }
         }
