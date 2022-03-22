@@ -1,4 +1,4 @@
-package com.convertit.convertitapp
+package com.convertit.convertitapp.ui.helpers
 
 import java.text.DecimalFormat
 

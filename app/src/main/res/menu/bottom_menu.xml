@@ -9,8 +9,4 @@
         android:id="@+id/currenciesFragment"
         android:title="Currencies"
         android:icon="@drawable/ic_currencies" />
-    <item
-        android:id="@+id/settingsFragment"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings" />
 </menu>

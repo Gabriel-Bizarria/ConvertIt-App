@@ -9,10 +9,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.convertit.convertitapp.ConversionViewModel
+import androidx.lifecycle.lifecycleScope
+import com.convertit.convertitapp.viewModel.ConversionViewModel
 import com.convertit.convertitapp.R
 import com.convertit.convertitapp.databinding.FragmentConversionBinding
-import com.convertit.convertitapp.formatter
+import com.convertit.convertitapp.ui.helpers.formatter
+import com.convertit.convertitapp.model.Request
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class ConversionFragment : Fragment() {
 
@@ -60,8 +66,8 @@ class ConversionFragment : Fragment() {
         binding.convertButton.setOnClickListener {
             val firstCurrency = binding.itMainCurrencies.text.toString()
             val secondCurrency = binding.itSecondCurrency.text.toString()
-
             var value = binding.tiValue.text.toString()
+            val request = Request(firstCurrency, secondCurrency, value.toDouble())
 
             if(value.isNullOrBlank() || firstCurrency == secondCurrency){
                 Toast.makeText(
@@ -70,9 +76,13 @@ class ConversionFragment : Fragment() {
                     Toast.LENGTH_SHORT).show()
             }else{
                 binding.tvValueToConvert.text = formatter.format(value.toDouble())
-                viewModel.getCurrency(firstCurrency, secondCurrency, value.toDouble()).observe(viewLifecycleOwner, Observer {
-                    binding.tvResultConverted.text = formatter.format(it)
-                })
+
+                lifecycleScope.async {
+                    viewModel.getCurrency(request).observe(viewLifecycleOwner) {
+                        binding.tvResultConverted.text = formatter.format(it)
+                    }
+                }
+
                 binding.cvResult.visibility = View.VISIBLE
             }
         }

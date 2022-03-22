@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfig = AppBarConfiguration(
             setOf(
                 R.id.conversionFragment,
-                R.id.currenciesFragment,
-                R.id.settingsFragment
+                R.id.currenciesFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfig)
