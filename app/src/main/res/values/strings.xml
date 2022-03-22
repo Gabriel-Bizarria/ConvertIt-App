@@ -12,14 +12,17 @@
     <string name="from">From</string>
     <string name="compare_one_from">Compare $1 from</string>
     <string name="toast_alert_not_valid_value">This value is not valid or the same currencies are selected!</string>
-    <!-- DropDown Menu-->
+    <string name="toast_alert_no_response_from_api">Was not possible to contact the API, check your internet connection and try again.</string>
 
+
+    <!-- DropDown menu Main Currencies -->
     <string-array name="main_currencies_list">
         <item>USD</item>
         <item>BRL</item>
         <item>EUR</item>
     </string-array>
 
+    <!-- DropDown menu Secondary Currencies -->
     <string-array name="second_currencies_list">
         <item>USD</item>
         <item>BRL</item>
