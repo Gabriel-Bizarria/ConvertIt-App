@@ -12,13 +12,13 @@
 
         <LinearLayout
             android:id="@+id/linearlayout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:orientation="horizontal"
-            android:layout_margin="20dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -27,31 +27,31 @@
 
                 <TextView
                     android:id="@+id/tv_from"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/from"
-                    android:textSize="20sp"
                     android:fontFamily="@font/coolvetica_regular"
-                    android:textColor="@color/black"/>
+                    android:text="@string/from"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    app:layout_constraintStart_toStartOf="@id/tv_from"
-                    app:layout_constraintTop_toBottomOf="@id/tv_from"
-                    android:layout_marginTop="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    >
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="@id/tv_from"
+                    app:layout_constraintTop_toBottomOf="@id/tv_from">
+
                     <AutoCompleteTextView
                         android:id="@+id/it_main_currencies"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:text="USD"
-                        android:textAlignment="center"
                         android:drawableStart="@drawable/ic_money"
-                        android:inputType="none"/>
+                        android:inputType="none"
+                        android:textAlignment="center"
+                        tools:text="USD" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -59,12 +59,11 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_arrows"
-                app:tint="@color/black"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="36dp"
-                />
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_arrows"
+                app:tint="@color/black" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -73,31 +72,31 @@
 
                 <TextView
                     android:id="@+id/tv_to"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To"
-                    android:textSize="20sp"
                     android:fontFamily="@font/coolvetica_regular"
-                    android:textColor="@color/black"/>
+                    android:text="To"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    app:layout_constraintStart_toStartOf="@id/tv_to"
-                    app:layout_constraintTop_toBottomOf="@id/tv_to"
-                    android:layout_marginTop="15dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    >
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="@id/tv_to"
+                    app:layout_constraintTop_toBottomOf="@id/tv_to">
+
                     <AutoCompleteTextView
                         android:id="@+id/it_second_currency"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:text="BRL"
-                        android:textAlignment="center"
                         android:drawableStart="@drawable/ic_money"
-                        android:inputType="none"/>
+                        android:inputType="none"
+                        android:textAlignment="center"
+                        tools:text="BRL" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -108,15 +107,14 @@
             android:id="@+id/tv_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/linearlayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="20dp"
-            android:text="@string/value"
-            android:textSize="20sp"
             android:fontFamily="@font/coolvetica_regular"
+            android:text="@string/value"
             android:textColor="@color/black"
-            />
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearlayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/value_input_layout"
@@ -134,7 +132,7 @@
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/ic_money"
                 android:inputType="numberDecimal"
-                android:maxLines="1"/>
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -142,28 +140,29 @@
             android:id="@+id/convert_button"
             android:layout_width="wrap_content"
             android:layout_height="60sp"
-            android:text="@string/convert"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/value_input_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/coolvetica_regular"
+            android:text="@string/convert"
             android:textAllCaps="false"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/value_input_layout" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/convert_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/lighter_gray"
-            android:layout_margin="20dp"
-            app:cardCornerRadius="10dp"
             android:visibility="gone"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/convert_button"
             tools:visibility="visible">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -194,7 +193,7 @@
                         android:id="@+id/tv_value_to_convert"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:fontFamily="@font/coolvetica_regular"
                         android:text="@string/to_be_converted"
                         android:textColor="@color/darker_green"
@@ -224,7 +223,7 @@
                         android:id="@+id/tv_result_converted"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:fontFamily="@font/coolvetica_regular"
                         android:text="@string/value_converted"
                         android:textColor="@color/darker_green"
@@ -233,17 +232,14 @@
                 </LinearLayout>
 
                 <TextView
-                    app:layout_constraintTop_toBottomOf="@id/linearlayout3"
-                    android:fontFamily="@font/coolvetica_regular"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/coolvetica_regular"
                     android:text="@string/phrase_attention"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toBottomOf="@id/linearlayout3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
