@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="8dp"
-    android:layout_margin="15dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
     android:padding="16dp"
     android:backgroundTint="@color/darker_gray">
 
@@ -17,6 +19,7 @@
 
         <TextView
             tools:text="USD"
+            android:id="@+id/tv_acronym_currency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,10 +31,11 @@
 
         <TextView
             tools:text="American Dollar"
+            android:id="@+id/tv_currency_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:layout_weight="1"
             android:fontFamily="@font/coolvetica_regular"
             android:textAlignment="center"
@@ -39,6 +43,7 @@
 
         <TextView
             tools:text="$0.20"
+            android:id="@+id/tv_currency_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -46,7 +51,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/coolvetica_regular"
             android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/darker_green" />
 
     </LinearLayout>
 

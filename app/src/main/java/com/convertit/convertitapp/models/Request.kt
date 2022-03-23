@@ -1,4 +1,4 @@
-package com.convertit.convertitapp.model
+package com.convertit.convertitapp.models
 
 data class Request(
     val firstCurrency: String,

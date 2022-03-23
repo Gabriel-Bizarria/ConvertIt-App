@@ -55,7 +55,7 @@
 
             <TextView
                 android:id="@+id/tv_currencies"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp"
                 android:fontFamily="@font/coolvetica_regular"
@@ -63,10 +63,23 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_linearlayout" />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/currencies_recycler_view"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_currencies"
+                android:orientation="vertical"
+                tools:listitem="@layout/cardview_currencies"
+                tools:itemCount="7"/>
+
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -93,7 +106,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/coolvetica_regular"
-                            android:text="USD"
+                            android:text="@string/tv_acronym_currency_usd"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
@@ -104,7 +117,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/coolvetica_regular"
-                            android:text="American Dollar"
+                            android:text="@string/tv_currency_name_usd"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
@@ -375,7 +388,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/coolvetica_regular"
-                            android:text="$0.04"
+                            android:text="@string/tv_currency_value_jpy"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
@@ -383,7 +396,59 @@
 
                 </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/darker_gray"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="7dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/coolvetica_regular"
+                            android:text="@string/tv_acronym_currency_brl"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/coolvetica_regular"
+                            android:text="@string/tv_name_currency_brazilian"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_value_currency_brl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/coolvetica_regular"
+                            android:text="@string/tv_currency_value_brl"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -13,6 +13,12 @@
     <string name="compare_one_from">Compare $1 from</string>
     <string name="toast_alert_not_valid_value">This value is not valid or the same currencies are selected!</string>
     <string name="toast_alert_no_response_from_api">Was not possible to contact the API, check your internet connection and try again.</string>
+    <string name="tv_name_currency_brazilian">Brazilian Real</string>
+    <string name="tv_acronym_currency_brl">BRL</string>
+    <string name="tv_acronym_currency_usd">USD</string>
+    <string name="tv_currency_name_usd">American Dollar</string>
+    <string name="tv_currency_value_brl">$0.04</string>
+    <string name="tv_currency_value_jpy">$0.04</string>
 
 
     <!-- DropDown menu Main Currencies -->
