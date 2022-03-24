@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.convertit.convertitapp.R
@@ -20,6 +21,9 @@ class CurrenciesFragment : Fragment() {
 
     private lateinit var adapter: CurrenciesListAdapter
     private lateinit var viewModel: MainViewModel
+    private lateinit var teste: String
+
+    lateinit var value: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,7 @@ class CurrenciesFragment : Fragment() {
 
         // Inflate the layout for this fragment
         _binding = FragmentCurrenciesBinding.inflate(layoutInflater, container, false)
+
         val view = binding.root
         return view
     }
@@ -44,12 +49,26 @@ class CurrenciesFragment : Fragment() {
         setDropdownMenuItems()
         initRecyclerView()
 
-        viewModel.currencyLiveData.observe(viewLifecycleOwner){
-            
+
+        binding.itMainCurrencies.onItemClickListener = AdapterView.OnItemClickListener{
+                parent,
+                view,
+                position,
+                id ->
+            var selectedItem = parent?.getItemAtPosition(position) as? String
+            selectedItem?.let {
+                    item -> viewModel.getCurrencySelected(item)
+            }
         }
 
+        viewModel.mainCurrencyLiveData.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                viewModel.getCurrenciesList()
+            }else{
+                println("WAS NOT POSSIBLE")
+            }
+        })
     }
-
 
     fun initRecyclerView(){
         adapter = CurrenciesListAdapter()
@@ -65,4 +84,7 @@ class CurrenciesFragment : Fragment() {
             setAdapter(firstAdapter)
         }
     }
+
+
+
 }

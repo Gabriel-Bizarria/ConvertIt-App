@@ -5,14 +5,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.convertit.convertitapp.MainCurrenciesList
 import com.convertit.convertitapp.databinding.CardviewCurrenciesBinding
-import com.convertit.convertitapp.models.CurrenciesListResult
+import com.convertit.convertitapp.models.CurrenciesListBase
+import com.convertit.convertitapp.viewModel.MainViewModel
+
 
 class CurrenciesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var _binding: CardviewCurrenciesBinding? = null
     private val binding get() = _binding!!
 
-    private var currenciesList : List<CurrenciesListResult> = MainCurrenciesList.currenciesList
+    private val viewModel: MainViewModel = MainViewModel()
+
+    private var currenciesList : List<CurrenciesListBase> = MainCurrenciesList.currenciesList
+
+    fun getListUpdated(){
+        //TODO("Montar a função usando um observer que irá observar as mudanças de estado do LiveData de Lista da ViewModel")
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         _binding = CardviewCurrenciesBinding.inflate(
@@ -20,6 +28,7 @@ class CurrenciesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             parent,
             false
         )
+        getListUpdated()
         return CurrencyViewHolder(binding)
     }
 
@@ -38,7 +47,7 @@ class CurrenciesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         val binding: CardviewCurrenciesBinding
     ): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(currency: CurrenciesListResult){
+        fun bind(currency: CurrenciesListBase){
             binding.tvAcronymCurrency.text = currency.acronym
             binding.tvCurrencyName.text = currency.currencyName
             binding.tvCurrencyValue.text = currency.currencyValue.toString()
