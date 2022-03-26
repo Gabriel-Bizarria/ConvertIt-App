@@ -11,9 +11,12 @@ import com.convertit.convertitapp.api.ApiService
 import com.convertit.convertitapp.constants.BASE_URL
 import com.convertit.convertitapp.models.CurrenciesListBase
 import com.convertit.convertitapp.models.Request
+import com.convertit.convertitapp.ui.helpers.formatter
 import com.convertit.convertitapp.util.NetworkUtils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.Exception
 
 
@@ -30,7 +33,10 @@ class MainViewModel(): ViewModel() {
     private val _finalListCurrencies = MutableLiveData<MutableList<CurrenciesListBase>>()
     val finalListCurrencies: LiveData<MutableList<CurrenciesListBase>> = _finalListCurrencies
 
+    private val _finalResponse = MutableLiveData<CurrenciesListBase>()
+    val finalResponse: LiveData<CurrenciesListBase> = _finalResponse
 
+    val finalList = mutableListOf<CurrenciesListBase>()
 
     //Conversion Fragments
     fun getConversion(request: Request): LiveData<Double> {
@@ -60,7 +66,6 @@ class MainViewModel(): ViewModel() {
         _mainCurrencyLiveData.postValue(itemDropdown)
     }
 
-
     fun getCurrenciesList(){
         val secondaryCurrenciesList = MainCurrenciesList.currenciesList
         val mainCurrency = mainCurrencyLiveData.value!!
@@ -69,37 +74,40 @@ class MainViewModel(): ViewModel() {
             if(currency.acronym != mainCurrency){
                 val request = Request(mainCurrency, currency.acronym, 0.0)
                 val extraData = CurrenciesListBase(currency.acronym, currency.currencyName, currency.currencyValue)
-                getCurrenciesToList(request, extraData)
+
+                viewModelScope.launch {
+                    contactApiGetList(request, extraData)
+                }
             }
         }
-
     }
 
-    //Montar a função que irá retornar uma lista de conversões e irá retornar estes valores na
-    // model da data class
-    private fun getCurrenciesToList(request: Request, extraData: CurrenciesListBase): LiveData<MutableList<CurrenciesListBase>> {
-        val finaList = mutableListOf<CurrenciesListBase>()
+
+
+    //Essa suspend fun tem que retornar algo em tempo de execução
+    suspend fun contactApiGetList(request: Request, extraData: CurrenciesListBase){
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = endpoint.getCurrency(request.firstCurrency, request.secondCurrency).execute()
                 if(response.isSuccessful){
-                    var data = response.body()?.entrySet()?.find {
+                    val data = response.body()?.entrySet()?.find {
                         it.key == "${request.firstCurrency}${request.secondCurrency}"
                     }!!.toPair()
-                    var rateBid = data.second.asJsonObject.entrySet().find {it.key == "bid"}!!.toPair().second
+                    println("THIS IS THE DATA THAT WE RECEIVED: ${data.toString()}")
+                    val rateBid = data.second.asJsonObject.entrySet().find {it.key == "bid"}!!.toPair().second
                     val rate = rateBid.toString().replace('"', ' ').toDouble()
-                    val conversedValue = rate * request.value
-                    finaList.add(CurrenciesListBase(extraData.acronym, extraData.currencyName, conversedValue))
-                    _finalListCurrencies.postValue(finaList)
+                    _finalResponse.postValue(CurrenciesListBase(extraData.acronym, extraData.currencyName, rate))
+                }else{
+                   Log.v("ERROR", "RESPONSE_NOT_SUCCESSFULL")
                 }
-            }catch (e: Exception){
-                Log.v(
-                    "API_REQUEST_ERROR_2",
-                    "Was not possible to contact the API: ${e.message}")
+            }catch (e:Exception){
+                Log.v("API_REQUEST_ERROR_2", "Was not possible to contact the API: ${e.message}")
             }
         }
-
-        return finalListCurrencies
     }
 
+    fun updateListByLiveData(){
+        
+
+    }
 }

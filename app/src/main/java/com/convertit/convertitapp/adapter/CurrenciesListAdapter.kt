@@ -2,6 +2,8 @@ package com.convertit.convertitapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.convertit.convertitapp.MainCurrenciesList
 import com.convertit.convertitapp.databinding.CardviewCurrenciesBinding
@@ -9,26 +11,29 @@ import com.convertit.convertitapp.models.CurrenciesListBase
 import com.convertit.convertitapp.viewModel.MainViewModel
 
 
-class CurrenciesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class CurrenciesListAdapter (private val viewModel: MainViewModel,
+                             private val lifecycleOwner: LifecycleOwner): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var _binding: CardviewCurrenciesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MainViewModel = MainViewModel()
-
     private var currenciesList : List<CurrenciesListBase> = MainCurrenciesList.currenciesList
 
     fun getListUpdated(){
-        //TODO("Montar a função usando um observer que irá observar as mudanças de estado do LiveData de Lista da ViewModel")
+        viewModel.finalListCurrencies.observe(lifecycleOwner, Observer {
+            if(it != null){
+                currenciesList = it
+            }
+        })
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        getListUpdated()
         _binding = CardviewCurrenciesBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        getListUpdated()
         return CurrencyViewHolder(binding)
     }
 

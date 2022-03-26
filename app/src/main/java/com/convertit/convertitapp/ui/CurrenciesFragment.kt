@@ -9,11 +9,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.convertit.convertitapp.R
 import com.convertit.convertitapp.adapter.CurrenciesListAdapter
 import com.convertit.convertitapp.databinding.FragmentCurrenciesBinding
 import com.convertit.convertitapp.viewModel.MainViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CurrenciesFragment : Fragment() {
     private var _binding: FragmentCurrenciesBinding? = null
@@ -58,20 +62,25 @@ class CurrenciesFragment : Fragment() {
             var selectedItem = parent?.getItemAtPosition(position) as? String
             selectedItem?.let {
                     item -> viewModel.getCurrencySelected(item)
+                println("OPTION_SELECTED_AT_DROPDOWN: $item")
             }
         }
 
-        viewModel.mainCurrencyLiveData.observe(viewLifecycleOwner, Observer {
-            if(it != null){
-                viewModel.getCurrenciesList()
-            }else{
-                println("WAS NOT POSSIBLE")
-            }
-        })
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.mainCurrencyLiveData.observe(viewLifecycleOwner, Observer {
+                if(it != null){
+                    lifecycleScope.launch {
+                        viewModel.getCurrenciesList()
+                    }
+                }else{
+                    println("WAS NOT POSSIBLE")
+                }
+            })
+        }
     }
 
     fun initRecyclerView(){
-        adapter = CurrenciesListAdapter()
+        adapter = CurrenciesListAdapter(viewModel, this)
         binding.currenciesRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.currenciesRecyclerView.adapter = adapter
     }
