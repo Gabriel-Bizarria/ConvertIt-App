@@ -42,16 +42,16 @@
             android:textColor="@color/black" />
 
         <TextView
-            tools:text="$0.20"
             android:id="@+id/tv_currency_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20sp"
             android:layout_weight="1"
             android:fontFamily="@font/coolvetica_regular"
-            android:textAlignment="center"
-            android:textColor="@color/darker_green" />
+            android:textAlignment="textStart"
+            android:layout_marginStart="30dp"
+            android:textColor="@color/darker_green"
+            android:textSize="20sp"
+            tools:text="$0.20" />
 
     </LinearLayout>
 
