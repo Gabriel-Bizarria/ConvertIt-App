@@ -19,16 +19,12 @@ class CurrenciesListAdapter (private val viewModel: MainViewModel,
 
     private var currenciesList : List<CurrenciesListBase> = MainCurrenciesList.currenciesList
 
-    fun getListUpdated(){
-        viewModel.finalListCurrencies.observe(lifecycleOwner, Observer {
-            if(it != null){
-                currenciesList = it
-            }
-        })
+    fun getListUpdated(data: List<CurrenciesListBase>){
+       this.currenciesList = data
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        getListUpdated()
         _binding = CardviewCurrenciesBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,

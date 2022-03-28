@@ -3,7 +3,6 @@ package com.convertit.convertitapp.viewModel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.convertit.convertitapp.MainCurrenciesList
@@ -13,14 +12,10 @@ import com.convertit.convertitapp.models.CurrenciesListBase
 import com.convertit.convertitapp.models.Request
 import com.convertit.convertitapp.ui.helpers.formatter
 import com.convertit.convertitapp.util.NetworkUtils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.Exception
+import kotlinx.coroutines.*
 
 
-class MainViewModel(): ViewModel() {
+class MainViewModel() : ViewModel() {
     private val retrofitClient = NetworkUtils.getRetrofitInstance(BASE_URL)
     private val endpoint: ApiService = retrofitClient.create(ApiService::class.java)
 
@@ -33,28 +28,29 @@ class MainViewModel(): ViewModel() {
     private val _finalListCurrencies = MutableLiveData<MutableList<CurrenciesListBase>>()
     val finalListCurrencies: LiveData<MutableList<CurrenciesListBase>> = _finalListCurrencies
 
-    private val _finalResponse = MutableLiveData<CurrenciesListBase>()
-    val finalResponse: LiveData<CurrenciesListBase> = _finalResponse
-
-    val finalList = mutableListOf<CurrenciesListBase>()
+    private val currenciesListFinal = mutableListOf<CurrenciesListBase>()
 
     //Conversion Fragments
     fun getConversion(request: Request): LiveData<Double> {
-        viewModelScope.launch(Dispatchers.IO){
-            try{
-                val response = endpoint.getCurrency(request.firstCurrency, request.secondCurrency).execute()
-                if(response.isSuccessful){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response =
+                    endpoint.getCurrency(request.firstCurrency, request.secondCurrency).execute()
+                if (response.isSuccessful) {
                     val data = response.body()?.entrySet()?.find {
                         it.key == "${request.firstCurrency}${request.secondCurrency}"
                     }!!.toPair()
                     println("THIS IS THE DATA THAT WE RECEIVED: ${data.toString()}")
-                    val rateBid = data.second.asJsonObject.entrySet().find {it.key == "bid"}!!.toPair().second
+                    val rateBid = data.second.asJsonObject.entrySet().find { it.key == "bid" }!!
+                        .toPair().second
                     val rate = rateBid.toString().replace('"', ' ').toDouble()
-                    _conversionLiveData.postValue( rate * request.value)
+                    _conversionLiveData.postValue(rate * request.value)
                 }
-            }catch (e: Exception){
-                Log.v("API_REQUEST_ERROR_1",
-                    "Was not possible to contact the API: ${e.message}")
+            } catch (e: Exception) {
+                Log.v(
+                    "API_REQUEST_ERROR_1",
+                    "Was not possible to contact the API: ${e.message}"
+                )
             }
         }
         return conversionLiveData
@@ -62,52 +58,62 @@ class MainViewModel(): ViewModel() {
 
 
     //Currencies Fragment
-    fun getCurrencySelected(itemDropdown: String){
+    fun getCurrencySelected(itemDropdown: String) {
         _mainCurrencyLiveData.postValue(itemDropdown)
     }
 
-    fun getCurrenciesList(){
+    fun getCurrenciesList() {
+
+        if (currenciesListFinal.size > 0) {
+            currenciesListFinal.clear()
+        }
+
         val secondaryCurrenciesList = MainCurrenciesList.currenciesList
         val mainCurrency = mainCurrencyLiveData.value!!
 
-        for(currency in secondaryCurrenciesList){
-            if(currency.acronym != mainCurrency){
-                val request = Request(mainCurrency, currency.acronym, 0.0)
-                val extraData = CurrenciesListBase(currency.acronym, currency.currencyName, currency.currencyValue)
 
-                viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            for (currency in secondaryCurrenciesList) {
+                if (currency.acronym != mainCurrency) {
+                    val request = Request(mainCurrency, currency.acronym, 1.0)
+                    val extraData = CurrenciesListBase(currency.acronym, currency.currencyName, 1.0)
                     contactApiGetList(request, extraData)
                 }
             }
+            Thread.sleep(3000)
+            _finalListCurrencies.postValue(currenciesListFinal)
+            Log.v("DATA_REACHED_LIVE_DATA", "$currenciesListFinal")
         }
     }
 
-
-
-    //Essa suspend fun tem que retornar algo em tempo de execução
-    suspend fun contactApiGetList(request: Request, extraData: CurrenciesListBase){
+    private fun contactApiGetList(request: Request, extraData: CurrenciesListBase) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = endpoint.getCurrency(request.firstCurrency, request.secondCurrency).execute()
-                if(response.isSuccessful){
+                val response =
+                    endpoint.getCurrency(request.firstCurrency, request.secondCurrency).execute()
+                if (response.isSuccessful) {
                     val data = response.body()?.entrySet()?.find {
                         it.key == "${request.firstCurrency}${request.secondCurrency}"
                     }!!.toPair()
-                    println("THIS IS THE DATA THAT WE RECEIVED: ${data.toString()}")
-                    val rateBid = data.second.asJsonObject.entrySet().find {it.key == "bid"}!!.toPair().second
+                    val rateBid = data.second.asJsonObject.entrySet().find { it.key == "bid" }!!
+                        .toPair().second
                     val rate = rateBid.toString().replace('"', ' ').toDouble()
-                    _finalResponse.postValue(CurrenciesListBase(extraData.acronym, extraData.currencyName, rate))
-                }else{
-                   Log.v("ERROR", "RESPONSE_NOT_SUCCESSFULL")
+                    val currencyResponse = CurrenciesListBase(
+                        extraData.acronym,
+                        extraData.currencyName,
+                        rate
+                    )
+                    Log.v("DATA_REACHED_REQUEST", "$currencyResponse")
+
+                    currenciesListFinal.add(currencyResponse)
                 }
-            }catch (e:Exception){
-                Log.v("API_REQUEST_ERROR_2", "Was not possible to contact the API: ${e.message}")
+            } catch (e: Exception) {
+                Log.v(
+                    "API_REQUEST_ERROR_1",
+                    "Was not possible to contact the API: ${e.message}"
+                )
             }
         }
-    }
-
-    fun updateListByLiveData(){
-        
-
     }
 }

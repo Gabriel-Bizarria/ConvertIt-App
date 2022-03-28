@@ -1,12 +1,12 @@
 package com.convertit.convertitapp.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.convertit.convertitapp.R
 import com.convertit.convertitapp.adapter.CurrenciesListAdapter
 import com.convertit.convertitapp.databinding.FragmentCurrenciesBinding
+import com.convertit.convertitapp.models.CurrenciesListBase
 import com.convertit.convertitapp.viewModel.MainViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CurrenciesFragment : Fragment() {
     private var _binding: FragmentCurrenciesBinding? = null
@@ -25,7 +26,6 @@ class CurrenciesFragment : Fragment() {
 
     private lateinit var adapter: CurrenciesListAdapter
     private lateinit var viewModel: MainViewModel
-    private lateinit var teste: String
 
     lateinit var value: String
 
@@ -39,9 +39,14 @@ class CurrenciesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
         // Inflate the layout for this fragment
         _binding = FragmentCurrenciesBinding.inflate(layoutInflater, container, false)
+
+        initRecyclerView()
+
+        viewModel.finalListCurrencies.observe(viewLifecycleOwner, Observer {
+            adapter.getListUpdated(it)
+        })
 
         val view = binding.root
         return view
@@ -50,33 +55,16 @@ class CurrenciesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        var list: List<CurrenciesListBase>
+
         setDropdownMenuItems()
-        initRecyclerView()
 
-
-        binding.itMainCurrencies.onItemClickListener = AdapterView.OnItemClickListener{
-                parent,
-                view,
-                position,
-                id ->
-            var selectedItem = parent?.getItemAtPosition(position) as? String
-            selectedItem?.let {
-                    item -> viewModel.getCurrencySelected(item)
-                println("OPTION_SELECTED_AT_DROPDOWN: $item")
+        viewModel.mainCurrencyLiveData.observe(viewLifecycleOwner, Observer {
+            lifecycleScope.launch(Dispatchers.IO) {
+                 viewModel.getCurrenciesList()
             }
-        }
+        })
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.mainCurrencyLiveData.observe(viewLifecycleOwner, Observer {
-                if(it != null){
-                    lifecycleScope.launch {
-                        viewModel.getCurrenciesList()
-                    }
-                }else{
-                    println("WAS NOT POSSIBLE")
-                }
-            })
-        }
     }
 
     fun initRecyclerView(){
@@ -92,8 +80,17 @@ class CurrenciesFragment : Fragment() {
         with(binding.itMainCurrencies){
             setAdapter(firstAdapter)
         }
+
+        binding.itMainCurrencies.onItemClickListener = AdapterView.OnItemClickListener{
+                parent,
+                view,
+                position,
+                id ->
+            var selectedItem = parent?.getItemAtPosition(position) as? String
+            selectedItem?.let {
+                    item -> viewModel.getCurrencySelected(item)
+                println("OPTION_SELECTED_AT_DROPDOWN: $item")
+            }
+        }
     }
-
-
-
 }
