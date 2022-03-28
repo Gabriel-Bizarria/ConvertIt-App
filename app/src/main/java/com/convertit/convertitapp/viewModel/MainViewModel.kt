@@ -81,7 +81,7 @@ class MainViewModel() : ViewModel() {
                     contactApiGetList(request, extraData)
                 }
             }
-            Thread.sleep(3000)
+            Thread.sleep(500)
             _finalListCurrencies.postValue(currenciesListFinal)
             Log.v("DATA_REACHED_LIVE_DATA", "$currenciesListFinal")
         }
