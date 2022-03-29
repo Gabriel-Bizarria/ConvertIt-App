@@ -1,4 +1,4 @@
-package com.convertit.convertitapp.util
+package com.convertit.convertitapp.core.util
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

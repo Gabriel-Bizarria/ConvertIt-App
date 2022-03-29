@@ -12,13 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.convertit.convertitapp.R
-import com.convertit.convertitapp.adapter.CurrenciesListAdapter
+import com.convertit.convertitapp.ui.adapter.CurrenciesListAdapter
 import com.convertit.convertitapp.databinding.FragmentCurrenciesBinding
 import com.convertit.convertitapp.models.CurrenciesListBase
-import com.convertit.convertitapp.viewModel.MainViewModel
+import com.convertit.convertitapp.ui.viewModel.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CurrenciesFragment : Fragment() {
     private var _binding: FragmentCurrenciesBinding? = null
@@ -29,16 +28,12 @@ class CurrenciesFragment : Fragment() {
 
     lateinit var value: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         // Inflate the layout for this fragment
         _binding = FragmentCurrenciesBinding.inflate(layoutInflater, container, false)
 
@@ -48,8 +43,7 @@ class CurrenciesFragment : Fragment() {
             adapter.getListUpdated(it)
         })
 
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onResume() {
@@ -67,13 +61,13 @@ class CurrenciesFragment : Fragment() {
 
     }
 
-    fun initRecyclerView(){
-        adapter = CurrenciesListAdapter(viewModel, this)
+    private fun initRecyclerView(){
+        adapter = CurrenciesListAdapter()
         binding.currenciesRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.currenciesRecyclerView.adapter = adapter
     }
 
-    fun setDropdownMenuItems(){
+    private fun setDropdownMenuItems(){
         val mainCurrencies = resources.getStringArray(R.array.main_currencies_list)
         val firstAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list_currencies, mainCurrencies)
 
@@ -86,7 +80,7 @@ class CurrenciesFragment : Fragment() {
                 view,
                 position,
                 id ->
-            var selectedItem = parent?.getItemAtPosition(position) as? String
+            val selectedItem = parent?.getItemAtPosition(position) as? String
             selectedItem?.let {
                     item -> viewModel.getCurrencySelected(item)
                 println("OPTION_SELECTED_AT_DROPDOWN: $item")

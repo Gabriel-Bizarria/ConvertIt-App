@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.convertit.convertitapp.viewModel.MainViewModel
+import com.convertit.convertitapp.ui.viewModel.MainViewModel
 import com.convertit.convertitapp.R
 import com.convertit.convertitapp.databinding.FragmentConversionBinding
 import com.convertit.convertitapp.ui.helpers.formatter
@@ -28,12 +28,11 @@ class ConversionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         // Inflate the layout for this fragment
         _binding = FragmentConversionBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -51,42 +50,45 @@ class ConversionFragment : Fragment() {
         }
     }
 
-    fun setDropdownMenuAdapters(){
+    private fun setDropdownMenuAdapters() {
         val mainCurrencies = resources.getStringArray(R.array.main_currencies_list)
-        val firstAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list_currencies, mainCurrencies)
+        val firstAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_list_currencies, mainCurrencies)
 
-        with(binding.itMainCurrencies){
+        with(binding.itMainCurrencies) {
             setAdapter(firstAdapter)
         }
 
         val secondCurrencies = resources.getStringArray(R.array.second_currencies_list)
-        val secondAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list_currencies, secondCurrencies)
+        val secondAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_list_currencies, secondCurrencies)
 
-        with(binding.itSecondCurrency){
+        with(binding.itSecondCurrency) {
             setAdapter(secondAdapter)
         }
     }
 
-    fun makeApiRequest(){
+    fun makeApiRequest() {
         val firstCurrency = binding.itMainCurrencies.text.toString()
         val secondCurrency = binding.itSecondCurrency.text.toString()
-        var value = binding.tiValue.text.toString()
-        var request: Request
+        val value = binding.tiValue.text.toString()
+        val request: Request
 
-        if(value.isNullOrBlank() || firstCurrency == secondCurrency){
+        if (value.isBlank() || firstCurrency == secondCurrency) {
             Toast.makeText(
                 requireContext(),
                 R.string.toast_alert_not_valid_value,
-                Toast.LENGTH_SHORT).show()
-        }else{
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
             request = Request(firstCurrency, secondCurrency, value.toDouble())
             binding.tvValueToConvert.text = formatter.format(value.toDouble())
 
-            lifecycleScope.launch {
-                viewModel.getConversion(request).observe(viewLifecycleOwner) {
-                    binding.tvResultConverted.text = formatter.format(it)
-                }
-            }
+            viewModel.getConversion(request)
+        }
+
+        viewModel.conversionLiveData.observe(viewLifecycleOwner){
+            binding.tvResultConverted.text = formatter.format(it)
             binding.cvResult.visibility = View.VISIBLE
         }
     }

@@ -1,18 +1,14 @@
-package com.convertit.convertitapp.adapter
+package com.convertit.convertitapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.convertit.convertitapp.MainCurrenciesList
 import com.convertit.convertitapp.databinding.CardviewCurrenciesBinding
 import com.convertit.convertitapp.models.CurrenciesListBase
-import com.convertit.convertitapp.viewModel.MainViewModel
 
 
-class CurrenciesListAdapter (private val viewModel: MainViewModel,
-                             private val lifecycleOwner: LifecycleOwner): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class CurrenciesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var _binding: CardviewCurrenciesBinding? = null
     private val binding get() = _binding!!
@@ -45,7 +41,7 @@ class CurrenciesListAdapter (private val viewModel: MainViewModel,
     override fun getItemCount(): Int = currenciesList.size
 
     class CurrencyViewHolder constructor(
-        val binding: CardviewCurrenciesBinding
+        private val binding: CardviewCurrenciesBinding
     ): RecyclerView.ViewHolder(binding.root){
 
         fun bind(currency: CurrenciesListBase){
