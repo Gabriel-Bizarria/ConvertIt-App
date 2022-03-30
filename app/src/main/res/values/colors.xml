@@ -3,11 +3,15 @@
     <!-- Green Color. -->
     <color name="main_green">#5CDF79</color>
     <color name="lighter_green">#B6FFC6</color>
-    <color name="darker_green">#338946</color>
+    <color name="darker_green1">#338946</color>
+    <color name="darker_green2">#184221</color>
+    <color name="darker_green3">#123219</color>
+
 
     <!-- Gray Color. -->
     <color name="lighter_gray">#DEDEDE</color>
-    <color name="darker_gray">#C4C4C4</color>
+    <color name="darker_gray1">#C4C4C4</color>
+    <color name="darker_gray2">#505050</color>
 
     <!-- Basic Colors. -->
     <color name="black">#FF000000</color>

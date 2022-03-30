@@ -2,11 +2,6 @@ package com.convertit.convertitapp.models
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseCurrency(
-	@field:SerializedName("USDEUR")
-	val response: ResponseCurrencyItem? = null
-)
-
 data class ResponseCurrencyItem(
 
 	@field:SerializedName("varBid")

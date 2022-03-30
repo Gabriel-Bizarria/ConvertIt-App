@@ -1,21 +1,52 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ConvertItApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/main_green</item>
-        <item name="colorPrimaryVariant">@color/darker_green</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/darker_green3</item>
+        <item name="colorPrimaryVariant">@color/darker_green2</item>
+        <item name="colorOnPrimary">@color/darker_green2</item>
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/lighter_gray</item>
-        <item name="colorSecondaryVariant">@color/darker_gray</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/darker_green2</item>
+        <item name="colorSecondaryVariant">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CardviewSettingStyle">
+        <item name="cardBackgroundColor">@color/darker_gray2</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MainTextStyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SecondaryTextStyle">
+        <item name="android:textColor">@color/darker_gray2</item>
+    </style>
+
+    <style name="drawableColor">
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:backgroundTint">@color/darker_green1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="BottomNavStyle">
+        <item name="backgroundTint">@color/darker_gray2</item>
+        <item name="itemTextColor">@color/darker_green1</item>
+        <item name="itemIconTint">@color/darker_green1</item>
+    </style>
+
     <style name="SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenBackground">@color/darker_green3</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_convertit_logo_vector_night</item>
         <item name="postSplashScreenTheme">@style/Theme.ConvertItApp</item>
     </style>

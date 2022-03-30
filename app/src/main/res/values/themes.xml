@@ -4,20 +4,47 @@
 
         <!-- Primary brand color. -->
         <!--- Green Color. -->
-        <item name="colorPrimary">@color/main_green</item>
-        <item name="colorPrimaryVariant">@color/darker_green</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/darker_green1</item>
+        <item name="colorPrimaryVariant">@color/darker_green2</item>
+        <item name="colorOnPrimary">@color/darker_gray2</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/darker_gray</item>
+        <item name="colorSecondary">@color/darker_gray1</item>
         <item name="colorSecondaryVariant">@color/lighter_gray</item>
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="CardviewSettingStyle">
+        <item name="cardBackgroundColor">@color/lighter_gray</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MainTextStyle">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SecondaryTextStyle">
+        <item name="android:textColor">@color/darker_gray2</item>
+    </style>
+
+    <style name="drawableColor">
+        <item name="itemIconTint">@color/black</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:backgroundTint">@color/darker_green1</item>
+    </style>
+
+    <style name="BottomNavStyle">
+        <item name="backgroundTint">@color/lighter_gray</item>
+        <item name="itemTextColor">@color/darker_green1</item>
+        <item name="itemIconTint">@color/darker_green1</item>
+    </style>
+
 
     <style name="SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>

@@ -6,16 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.convertit.convertitapp.MainCurrenciesList
-import com.convertit.convertitapp.core.api.RetrofitInstance.endpoint
 import com.convertit.convertitapp.core.repository.Repository
 import com.convertit.convertitapp.models.CurrenciesListBase
 import com.convertit.convertitapp.models.Request
-import com.convertit.convertitapp.models.ResponseCurrency
 import com.convertit.convertitapp.models.ResponseCurrencyItem
+import com.convertit.convertitapp.ui.helpers.formatter
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -90,12 +90,46 @@ class MainViewModel : ViewModel() {
                 if (currency.acronym != mainCurrency) {
                     val extraData =
                         CurrenciesListBase(currency.acronym, currency.currencyName, "1.0")
+                    val response = repository.getCurrency(mainCurrency, currency.acronym).enqueue(object :
+                        Callback<JsonObject>{
+                        override fun onResponse(
+                            call: Call<JsonObject>,
+                            response: Response<JsonObject>
+                        ) {
+                            if(!response.isSuccessful){
+                                Log.e("ERROR", "The contact to API was not successful. ${response.code()}")
+                            }else{
+                                val mapType: Type = object : TypeToken<Map<
+                                        String,
+                                        ResponseCurrencyItem
+                                        >>(){}.type
+                                val currencyResponse: Map<String, ResponseCurrencyItem> = Gson()
+                                    .fromJson(response.body(), mapType)
+                                val rate = currencyResponse["$mainCurrency${currency.acronym}"]?.bid
 
+                                if (rate != null) {
+                                    val formattedRate = formatter.format(rate.toDouble())
+                                    currenciesListFinal.add(
+                                        CurrenciesListBase(
+                                            currency.acronym,
+                                            currency.currencyName,
+                                            "$$formattedRate"
+                                        )
+                                    )
+                                    if(currenciesListFinal.size == secondaryCurrenciesList.size - 1){
+                                        _finalListCurrencies.postValue(currenciesListFinal)
+                                    }
+                                    Log.v("DATA_REACHED_FINAL_LIST", "$currenciesListFinal")
+                                }
+                            }
+                        }
+                        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                            Log.e("ERROR", "Was not possible to contact the API.")
+                        }
+                    })
                 }
             }
         }
-        _finalListCurrencies.postValue(currenciesListFinal)
-        Log.v("DATA_REACHED_LIVE_DATA", "$currenciesListFinal")
     }
 }
 

@@ -32,16 +32,17 @@ class CurrenciesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         // Inflate the layout for this fragment
         _binding = FragmentCurrenciesBinding.inflate(layoutInflater, container, false)
 
         initRecyclerView()
 
-        viewModel.finalListCurrencies.observe(viewLifecycleOwner, Observer {
+        viewModel.finalListCurrencies.observe(viewLifecycleOwner) {
             adapter.getListUpdated(it)
-        })
+            binding.warningTv.visibility = View.GONE
+        }
 
         return binding.root
     }
@@ -53,11 +54,11 @@ class CurrenciesFragment : Fragment() {
 
         setDropdownMenuItems()
 
-        viewModel.mainCurrencyLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.mainCurrencyLiveData.observe(viewLifecycleOwner) {
             lifecycleScope.launch(Dispatchers.IO) {
-                 viewModel.getCurrenciesList()
+                viewModel.getCurrenciesList()
             }
-        })
+        }
 
     }
 

@@ -6,7 +6,7 @@ import retrofit2.Call
 
 class Repository {
 
-    suspend fun getCurrency(mainCurrency: String, secondCurrency: String): Call<JsonObject> {
+    fun getCurrency(mainCurrency: String, secondCurrency: String): Call<JsonObject> {
         return RetrofitInstance.endpoint.getCurrency(mainCurrency, secondCurrency)
     }
 }

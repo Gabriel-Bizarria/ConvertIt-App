@@ -14,6 +14,7 @@ class MainCurrenciesList {
             CurrenciesListBase("JPY", "Japanese Yen", "$0.0"),
             CurrenciesListBase("ARS", "Argentinian Peso", "$0.0"),
             CurrenciesListBase("CNY", "Chinese Yuan", "$0.0"),
+            CurrenciesListBase("MXN", "Mexican Peso", "0.0")
         )
 
     }

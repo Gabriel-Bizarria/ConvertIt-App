@@ -13,10 +13,10 @@ class CurrenciesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private var _binding: CardviewCurrenciesBinding? = null
     private val binding get() = _binding!!
 
-    private var currenciesList : List<CurrenciesListBase> = MainCurrenciesList.currenciesList
+    private var currenciesList : List<CurrenciesListBase> = listOf()
 
     fun getListUpdated(data: List<CurrenciesListBase>){
-       this.currenciesList = data
+       this.currenciesList = data.sortedBy { it.acronym }
         notifyDataSetChanged()
     }
 
@@ -47,7 +47,7 @@ class CurrenciesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         fun bind(currency: CurrenciesListBase){
             binding.tvAcronymCurrency.text = currency.acronym
             binding.tvCurrencyName.text = currency.currencyName
-            binding.tvCurrencyValue.text = currency.currencyValue.toString()
+            binding.tvCurrencyValue.text = currency.currencyValue
         }
     }
 }

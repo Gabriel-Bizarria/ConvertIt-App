@@ -8,13 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.convertit.convertitapp.ui.viewModel.MainViewModel
 import com.convertit.convertitapp.R
 import com.convertit.convertitapp.databinding.FragmentConversionBinding
-import com.convertit.convertitapp.ui.helpers.formatter
 import com.convertit.convertitapp.models.Request
-import kotlinx.coroutines.launch
+import com.convertit.convertitapp.ui.helpers.formatter
+import com.convertit.convertitapp.ui.viewModel.MainViewModel
 
 class ConversionFragment : Fragment() {
 
@@ -27,7 +25,7 @@ class ConversionFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         // Inflate the layout for this fragment
@@ -68,7 +66,7 @@ class ConversionFragment : Fragment() {
         }
     }
 
-    fun makeApiRequest() {
+    private fun makeApiRequest() {
         val firstCurrency = binding.itMainCurrencies.text.toString()
         val secondCurrency = binding.itSecondCurrency.text.toString()
         val value = binding.tiValue.text.toString()
