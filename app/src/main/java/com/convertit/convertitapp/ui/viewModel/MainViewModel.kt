@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.convertit.convertitapp.MainCurrenciesList
+import com.convertit.convertitapp.core.repository.MainCurrenciesList
 import com.convertit.convertitapp.core.repository.Repository
 import com.convertit.convertitapp.models.CurrenciesListBase
 import com.convertit.convertitapp.models.Request
@@ -77,7 +77,7 @@ class MainViewModel : ViewModel() {
         _mainCurrencyLiveData.postValue(itemDropdown)
     }
 
-    suspend fun getCurrenciesList() {
+    fun getCurrenciesList() {
         if(currenciesListFinal.size > 0){
             currenciesListFinal.clear()
         }

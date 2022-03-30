@@ -3,7 +3,6 @@ package com.convertit.convertitapp.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.convertit.convertitapp.MainCurrenciesList
 import com.convertit.convertitapp.databinding.CardviewCurrenciesBinding
 import com.convertit.convertitapp.models.CurrenciesListBase
 

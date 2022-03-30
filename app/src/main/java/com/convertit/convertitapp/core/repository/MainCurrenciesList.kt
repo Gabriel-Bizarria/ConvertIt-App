@@ -1,4 +1,4 @@
-package com.convertit.convertitapp
+package com.convertit.convertitapp.core.repository
 
 import com.convertit.convertitapp.models.CurrenciesListBase
 
