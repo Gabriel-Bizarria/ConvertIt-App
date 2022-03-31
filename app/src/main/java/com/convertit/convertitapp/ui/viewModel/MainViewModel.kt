@@ -116,10 +116,9 @@ class MainViewModel : ViewModel() {
                                             "$$formattedRate"
                                         )
                                     )
-                                    if(currenciesListFinal.size == secondaryCurrenciesList.size - 1){
-                                        _finalListCurrencies.postValue(currenciesListFinal)
-                                    }
-                                    Log.v("DATA_REACHED_FINAL_LIST", "$currenciesListFinal")
+                                }
+                                if(currenciesListFinal.size == secondaryCurrenciesList.size - 1){
+                                    _finalListCurrencies.postValue(currenciesListFinal)
                                 }
                             }
                         }

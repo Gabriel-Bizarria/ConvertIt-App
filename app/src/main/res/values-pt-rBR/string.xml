@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">ConvertItApp</string>
+    <string name="phrase_attention">*Atenção: Essa conversão tem cárater somente informacional. Para informações oficiais, consulte as regras de câmbio do seu respectivo país.</string>
+    <string name="value_converted">VALUE_CONVERTED</string>
+    <string name="converted_value">Valor convertido</string>
+    <string name="to_be_converted">TO_BE_CONVERTED</string>
+    <string name="value_to_be_converted">Valor a ser convertido</string>
+    <string name="result_of_conversion">Result of Conversion</string>
+    <string name="convert">Converter</string>
+    <string name="value">Valor</string>
+    <string name="from">De</string>
+    <string name="compare_one_from">Compare $1 de</string>
+    <string name="toast_alert_not_valid_value">O valor digitado não é válido ou os campos estão preenchidos de uma mesma moeda!</string>
+    <string name="toast_alert_no_response_from_api">Não foi possível contactar a API, cheque sua conexão de internet e tente novamente.</string>
+    <string name="select_a_currency_to_show_the_values">Selecione a moeda para mostrar os valores convertidos</string>
+    <string name="currencies">Câmbios</string>
+    <string name="to">Para</string>
+
+    <!-- DropDown menu Main Currencies -->
+    <string-array name="main_currencies_list">
+        <item>USD</item>
+        <item>BRL</item>
+        <item>EUR</item>
+    </string-array>
+
+    <!-- DropDown menu Secondary Currencies -->
+    <string-array name="second_currencies_list">
+        <item>USD</item>
+        <item>BRL</item>
+        <item>EUR</item>
+        <item>CAD</item>
+        <item>CNY</item>
+        <item>ARS</item>
+        <item>JPY</item>
+        <item>GBP</item>
+        <item>CLP</item>
+        <item>NZD</item>
+        <item>ZAR</item>
+        <item>AUD</item>
+        <item>NOK</item>
+    </string-array>
+</resources>

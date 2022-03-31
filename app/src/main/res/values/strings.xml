@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ConvertItApp</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="phrase_attention">*Attention: This conversion is for informational purpose only. For official information, consult your country currencies exchange rules.</string>
     <string name="value_converted">VALUE_CONVERTED</string>
     <string name="converted_value">Converted value</string>
@@ -13,15 +12,9 @@
     <string name="compare_one_from">Compare $1 from</string>
     <string name="toast_alert_not_valid_value">This value is not valid or the same currencies are selected!</string>
     <string name="toast_alert_no_response_from_api">Was not possible to contact the API, check your internet connection and try again.</string>
-    <string name="tv_name_currency_brazilian">Brazilian Real</string>
-    <string name="tv_acronym_currency_brl">BRL</string>
-    <string name="tv_acronym_currency_usd">USD</string>
-    <string name="tv_currency_name_usd">American Dollar</string>
-    <string name="tv_currency_value_brl">$0.04</string>
-    <string name="tv_currency_value_jpy">$0.04</string>
     <string name="select_a_currency_to_show_the_values">Select a currency to show the values</string>
     <string name="currencies">Currencies</string>
-
+    <string name="to">To</string>
 
     <!-- DropDown menu Main Currencies -->
     <string-array name="main_currencies_list">

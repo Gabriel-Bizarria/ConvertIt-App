@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/conversionFragment"
-        android:title="Convert"
+        android:title="@string/convert"
         android:icon="@drawable/ic_currencyexchange" />
     <item
         android:id="@+id/currenciesFragment"
-        android:title="Currencies"
+        android:title="@string/currencies"
         android:icon="@drawable/ic_currencies" />
 </menu>
