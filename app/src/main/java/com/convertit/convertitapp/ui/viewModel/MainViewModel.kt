@@ -39,7 +39,7 @@ class MainViewModel : ViewModel() {
     //Conversion Fragments
     fun getConversion(request: Request) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getCurrency(request.firstCurrency, request.secondCurrency).enqueue(object :
+           repository.getCurrency(request.firstCurrency, request.secondCurrency).enqueue(object :
                 Callback<JsonObject>{
                 override fun onResponse(
                     call: Call<JsonObject>,
@@ -88,9 +88,7 @@ class MainViewModel : ViewModel() {
 
             for (currency in secondaryCurrenciesList) {
                 if (currency.acronym != mainCurrency) {
-                    val extraData =
-                        CurrenciesListBase(currency.acronym, currency.currencyName, "1.0")
-                    val response = repository.getCurrency(mainCurrency, currency.acronym).enqueue(object :
+                    repository.getCurrency(mainCurrency, currency.acronym).enqueue(object :
                         Callback<JsonObject>{
                         override fun onResponse(
                             call: Call<JsonObject>,
@@ -131,89 +129,3 @@ class MainViewModel : ViewModel() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*try {
-
-             val response =
-                    endpoint.getCurrency(request.firstCurrency, request.secondCurrency).execute()
-                if (response.isSuccessful) {
-                    val data = response.body()?.entrySet()?.find {
-                        it.key == "${request.firstCurrency}${request.secondCurrency}"
-                    }?.toPair()
-                    val rateBid = data?.second?.asJsonObject?.entrySet()?.find { it.key == "bid" }
-                        ?.toPair()?.second
-                    val rate = rateBid.toString().replace('"', ' ').toDouble()
-                    _conversionLiveData.postValue(rate * request.value)
-                }
-            } catch (e: Exception) {
-                Log.v(
-                    "API_REQUEST_ERROR_1",
-                    "Was not possible to contact the API: ${e.message}"
-                )
-            }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-//MÉTODO ANTES DO REPOSITORY, SE NECESSÁRIO MUDAR O RETORNO DO API SERVICE PARA CALL<JSONOBJECT>
-/*val response = endpoint.getCurrency(mainCurrency, currency.acronym).enqueue(object :
-    Callback<JsonObject>{
-    override fun onResponse(
-        call: Call<JsonObject>,
-        response: Response<JsonObject>
-    ) {
-        if(!response.isSuccessful){
-            Log.e("ERROR", "The contact to API was not successful. ${response.code()}")
-        }else{
-            val mapType: Type = object : TypeToken<Map<
-                    String,
-                    ResponseCurrencyItem
-                    >>(){}.type
-            val currencyResponse: Map<String, ResponseCurrencyItem> = Gson()
-                .fromJson(response.body(), mapType)
-            val rate = currencyResponse["$mainCurrency${currency.acronym}"]?.bid
-
-            if (rate != null) {
-                currenciesListFinal.add(
-                    CurrenciesListBase(
-                        currency.acronym,
-                        currency.currencyName,
-                        "$$rate"
-                    )
-                )
-                Log.v("DATA_REACHED_FINAL_LIST", "$currenciesListFinal")
-            }
-        }
-    }
-    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-        Log.e("ERROR", "Was not possible to contact the API.")
-    }
-})*/

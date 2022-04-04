@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +24,7 @@ class CurrenciesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: CurrenciesListAdapter
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by activityViewModels()
 
     lateinit var value: String
 
@@ -32,7 +33,6 @@ class CurrenciesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         // Inflate the layout for this fragment
         _binding = FragmentCurrenciesBinding.inflate(layoutInflater, container, false)
 
@@ -48,8 +48,6 @@ class CurrenciesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        var list: List<CurrenciesListBase>
 
         setDropdownMenuItems()
 

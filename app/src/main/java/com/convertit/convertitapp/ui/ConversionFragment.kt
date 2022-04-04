@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.convertit.convertitapp.R
 import com.convertit.convertitapp.databinding.FragmentConversionBinding
@@ -19,15 +20,13 @@ class ConversionFragment : Fragment() {
     private var _binding: FragmentConversionBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
         // Inflate the layout for this fragment
         _binding = FragmentConversionBinding.inflate(inflater, container, false)
         return binding.root
